@@ -1,0 +1,17 @@
+export const PRODUCT_DB = [
+  {name:'Water',        viscosity:1,     shear:0,  notes:'Newtonian'},
+  {name:'Milk',         viscosity:2,     shear:0,  notes:'Newtonian'},
+  {name:'Cream (40%)',  viscosity:15,    shear:0,  notes:'Newtonian'},
+  {name:'Vegetable Oil',viscosity:65,    shear:0,  notes:'Newtonian'},
+  {name:'Ice Cream Mix',viscosity:300,   shear:55, notes:'Emulsified dairy'},
+  {name:'Salsa',        viscosity:500,   shear:5,  notes:'Contains particles'},
+  {name:'Chocolate',    viscosity:800,   shear:10, notes:'Thixotropic'},
+  {name:'Ketchup',      viscosity:1000,  shear:20, notes:'Shear thinning'},
+  {name:'Yogurt',       viscosity:1500,  shear:8,  notes:'Shear thinning'},
+  {name:'Glycerin',     viscosity:1500,  shear:0,  notes:'Newtonian'},
+  {name:'Corn Syrup',   viscosity:2500,  shear:0,  notes:'Newtonian'},
+  {name:'Tomato Paste', viscosity:5000,  shear:25, notes:'Shear thinning'},
+  {name:'Mayonnaise',   viscosity:6000,  shear:30, notes:'Shear thinning'},
+  {name:'Honey',        viscosity:10000, shear:0,  notes:'Newtonian'},
+  {name:'Peanut Butter',viscosity:25000, shear:40, notes:'Viscoplastic'},
+];
