@@ -19,7 +19,7 @@ export default function PumpCurve({ result, width = 340, height = 210 }) {
   const dutyY = flowToY(Math.max(0,(dutyRPM-slipRPM)*pump.disp));
   const ticks = 5;
   return (
-    <svg width={width} height={height} style={{display:'block',borderRadius:6,background:'var(--gray-light)',border:'1px solid var(--gray-border)'}}>
+    <svg viewBox={`0 0 ${width} ${height}`} width="100%" style={{display:'block',borderRadius:6,background:'var(--gray-light)',border:'1px solid var(--gray-border)'}}>
       <g transform={`translate(${PAD.left},${PAD.top})`}>
         {Array.from({length:ticks+1},(_,i)=>{
           const y = (i/ticks)*H;
