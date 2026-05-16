@@ -1,6 +1,6 @@
 import {
   ALL_PUMPS, PUMP_ROTOR_LIMITS, GEAR_LIMITS,
-  PUMP_SLIP_EQ, NO_SLIP_EQ, PUMP_SLIP_EF, ROTOR_DIMS,
+  PUMP_SLIP_EQ, NO_SLIP_EQ, PUMP_SLIP_EF, ROTOR_DIMS, PUMP_HP_CONST,
 } from '../data/pumps.js';
 
 export const toUS = (val, qty, units) => {
@@ -81,7 +81,8 @@ export const calcResult = (pump, cls, flow, pressure, visc, temp, sizeOnly=false
   const slipRPM = getSlipRPM(pump.name, aP, slipFactor);
   const dutyRPM = flow / pump.disp + slipRPM;
   const adjMaxRPM = Math.max(pump.maxRPM * (2/K), pump.maxRPM * 0.25);
-  const bhp = (pressure/8 + K) * (dutyRPM/1080);
+  const hpConst = PUMP_HP_CONST[pump.name] || 1080;
+  const bhp = (pressure/8 + K) * (dutyRPM/hpConst);
   const kw = bhp * 0.7457;
   const warnings = [];
   if (pressure > rc.maxPSI) warnings.push(`Pressure exceeds rotor class limit (${rc.maxPSI} PSI max)`);

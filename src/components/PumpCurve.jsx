@@ -1,5 +1,3 @@
-import { adjPressure, getSlipRPM } from '../lib/calculations.js';
-
 export default function PumpCurve({ result, width = 340, height = 210 }) {
   if (!result) return null;
   const { pump, slipRPM, dutyRPM, adjMaxRPM } = result;
@@ -12,8 +10,7 @@ export default function PumpCurve({ result, width = 340, height = 210 }) {
   const flowToY = f => H - (f/maxFlow)*H;
   const points = [];
   for (let rpm = 0; rpm <= maxRPM; rpm += maxRPM/60) {
-    const slip = Math.max(0, getSlipRPM(pump.name, adjPressure(0, 1), 1));
-    const f = Math.max(0, (rpm - slip) * pump.disp);
+    const f = Math.max(0, (rpm - slipRPM) * pump.disp);
     points.push([rpmToX(rpm), flowToY(f)]);
   }
   const pathD = points.map((p,i) => `${i===0?'M':'L'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');

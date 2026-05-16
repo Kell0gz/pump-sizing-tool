@@ -1,8 +1,8 @@
 export const LOBE_PUMPS = [
   { name:'PD200-0', disp:0.003, maxRPM:1400, maxFlow:3.0,  port:'0.5"' },
   { name:'PD200',   disp:0.008, maxRPM:1400, maxFlow:8.0,  port:'0.5" / 0.75"' },
-  { name:'PD250',   disp:0.011, maxRPM:1400, maxFlow:11.0, port:'0.75"' },
-  { name:'PD275',   disp:0.014, maxRPM:1400, maxFlow:14.0, port:'0.75" / 1.0"' },
+  { name:'PD250',   disp:0.011, maxRPM:1200, maxFlow:11.0, port:'0.75"' },
+  { name:'PD275',   disp:0.014, maxRPM:1200, maxFlow:14.0, port:'0.75" / 1.0"' },
   { name:'PD300',   disp:0.028, maxRPM:1000, maxFlow:28.0, port:'1.0" / 1.5"' },
   { name:'PD350',   disp:0.040, maxRPM:1000, maxFlow:40.0, port:'1.5" / 2.0"' },
   { name:'PD400',   disp:0.081, maxRPM:900,  maxFlow:72.9, port:'1.5"' },
@@ -12,7 +12,7 @@ export const LOBE_PUMPS = [
   { name:'PD550',   disp:0.285, maxRPM:800,  maxFlow:228.0,port:'3.0"' },
   { name:'PD551',   disp:0.285, maxRPM:800,  maxFlow:228.0,port:'3.0"' },
   { name:'PD575',   disp:0.361, maxRPM:700,  maxFlow:252.7,port:'3.0" / 4.0"' },
-  { name:'PD576',   disp:0.330, maxRPM:700,  maxFlow:231.0,port:'3.0" / 4.0"' },
+  { name:'PD576',   disp:0.361, maxRPM:700,  maxFlow:252.7,port:'3.0" / 4.0"' },
   { name:'PD600',   disp:0.460, maxRPM:600,  maxFlow:276.0,port:'4.0"' },
   { name:'PD602',   disp:0.530, maxRPM:600,  maxFlow:318.0,port:'4.0"' },
   { name:'PD650',   disp:0.700, maxRPM:500,  maxFlow:350.0,port:'4.0" / 6.0"' },
@@ -21,15 +21,15 @@ export const LOBE_PUMPS = [
 ];
 
 export const GEAR_PUMPS = [
-  { name:'GP200/07', disp:0.002, maxRPM:1400, maxFlow:2.8,  port:'0.5"' },
-  { name:'GP200/10', disp:0.003, maxRPM:1400, maxFlow:4.2,  port:'0.75"' },
-  { name:'GP175/22', disp:0.007, maxRPM:1400, maxFlow:9.8,  port:'1.0"' },
-  { name:'GP175/38', disp:0.010, maxRPM:1400, maxFlow:14.0, port:'1.5"' },
-  { name:'GP275/22', disp:0.007, maxRPM:1400, maxFlow:9.8,  port:'1.0"' },
-  { name:'GP275/38', disp:0.010, maxRPM:1400, maxFlow:14.0, port:'1.5"' },
-  { name:'GP300/28', disp:0.016, maxRPM:1200, maxFlow:19.2, port:'1.0"' },
-  { name:'GP350/40', disp:0.023, maxRPM:1200, maxFlow:27.6, port:'1.5"' },
-  { name:'GP375/52', disp:0.030, maxRPM:1200, maxFlow:36.0, port:'2.0"' },
+  { name:'GP200/07', disp:0.002,  maxRPM:1800, maxFlow:3.6,  port:'0.5"' },
+  { name:'GP200/10', disp:0.003,  maxRPM:1800, maxFlow:5.4,  port:'0.75"' },
+  { name:'GP175/22', disp:0.0023, maxRPM:1800, maxFlow:4.14, port:'1.0"' },
+  { name:'GP175/38', disp:0.004,  maxRPM:1800, maxFlow:7.2,  port:'1.5"' },
+  { name:'GP275/22', disp:0.007,  maxRPM:1800, maxFlow:12.6, port:'1.0"' },
+  { name:'GP275/38', disp:0.010,  maxRPM:1800, maxFlow:18.0, port:'1.5"' },
+  { name:'GP300/28', disp:0.016,  maxRPM:1800, maxFlow:28.8, port:'1.0"' },
+  { name:'GP350/40', disp:0.023,  maxRPM:1800, maxFlow:41.4, port:'1.5"' },
+  { name:'GP375/52', disp:0.030,  maxRPM:1800, maxFlow:54.0, port:'2.0"' },
 ];
 
 export const ALL_PUMPS = [...LOBE_PUMPS, ...GEAR_PUMPS];
@@ -74,13 +74,13 @@ export const PUMP_SLIP_EQ = {
   'PD501':  {a:0.0041,   b:0.008},
   'PD550':  {a:0.0039,   b:-0.0679},
   'PD551':  {a:0.0039,   b:-0.0679},
-  'PD575':  {a:0.0037,   b:-0.0354},
+  'PD575':  {a:0.0037,   b:-0.036},
   'PD576':  {a:0.0037,   b:-0.0354},
   'PD602':  {a:0.0016,   b:0.0319},
   'PD652':  {a:0.004,    b:0.2484},
   'GP175/22':{a:0.00002, b:-0.0284},
   'GP175/38':{a:0.00002, b:-0.0284},
-  'GP275/22':{a:0.0002,  b:-0.0379},
+  'GP275/22':{a:0.0002,  b:-0.0129},
   'GP275/38':{a:0.0001,  b:-0.014},
   'GP300/28':{a:0.0003,  b:-0.012},
   'GP350/40':{a:0.0002,  b:-0.0151},
@@ -98,6 +98,20 @@ export const PUMP_SLIP_EF = {
   'PD575':{E:1.11,F:1.23},   'PD576':{E:1.11,F:1.23},
   'PD602':{E:1.11,F:1.23},   'PD652':{E:1.11,F:1.23},
   'PD677':{E:1.11,F:1.23},
+};
+
+export const PUMP_HP_CONST = {
+  'PD200-0': 16500, 'PD200': 15480,
+  'PD250':   10320, 'PD275':  9650,
+  'PD300':    4900, 'PD350':  3500,
+  'PD400':    1325, 'PD450':  1080,
+  'PD500':     850, 'PD501':   850,
+  'PD550':     725, 'PD551':   725,
+  'PD575':     420, 'PD576':   420,
+  'PD602':     390, 'PD652':   256,
+  'GP175/22': 16500, 'GP175/38': 15480,
+  'GP275/22': 15480, 'GP275/38': 10320,
+  'GP300/28':  6500, 'GP350/40':  4900,
 };
 
 export const ROTOR_DIMS = {
