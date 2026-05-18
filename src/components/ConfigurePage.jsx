@@ -60,20 +60,75 @@ const CONNECTION_SIZES = [
   { label: '8.0"', code: '80' },
 ];
 
-const ROTOR_MATERIALS = [
-  { label: 'Non-Galling N60 SS',   code: 'N60',        group: 'metal' },
-  { label: '316L SS (Legacy)',      code: '316L',       group: 'metal' },
-  { label: 'Alloy 88 SS',          code: 'A88',        group: 'metal' },
-  { label: 'Hydex',                code: 'Hydex',      group: 'polymer' },
-  { label: 'Metal Det. Hydex',     code: 'MDHydex',    group: 'polymer' },
-  { label: 'PEEK',                 code: 'PEEK',       group: 'polymer' },
-  { label: 'PTFE',                 code: 'PTFE',       group: 'polymer' },
-  { label: 'PTFE/SS',              code: 'PTFE-SS',    group: 'polymer' },
-  { label: 'PolyFlex Acetal MD',   code: 'PolyFlex',   group: 'polymer' },
-  { label: 'DuraCore',             code: 'DuraCore',   group: 'polymer' },
-  { label: 'DuraCore MD',          code: 'DuraCoreHD', group: 'polymer' },
-  { label: 'DuraCore HP',          code: 'DuraCoreHP', group: 'polymer' },
-  { label: 'DuraCore HP MD',       code: 'DuraCoreHPMD', group: 'polymer' },
+// Single source of truth for all rotor options.
+// cls: rotor class from sizing (null = no class restriction).
+// allowsSuffix: L or HC material grade suffix valid for this rotor (SS metal only).
+// hp: High Pressure variant — requires HP cover.
+// ff: FoodFirst only — requires FoodFirst cover (16–19).
+const ROTOR_CODES = [
+  // N60 SS (Non-Galling) — Class C
+  { code:'80',  cls:'C', label:'80 — Class C, N60 SS, non-galling, Bi-Lobe',      group:'metal', allowsSuffix:true },
+  { code:'90',  cls:'C', label:'90 — Class C, N60 SS, non-galling, Tri-Lobe',     group:'metal', allowsSuffix:true },
+  { code:'85',  cls:'C', label:'85 — Class C, N60 SS, non-galling, Bi-Lobe HP',   group:'metal', allowsSuffix:true, hp:true },
+  // N60 SS — Class D
+  { code:'81',  cls:'D', label:'81 — Class D, N60 SS, non-galling, Bi-Lobe',      group:'metal', allowsSuffix:true },
+  { code:'91',  cls:'D', label:'91 — Class D, N60 SS, non-galling, Tri-Lobe',     group:'metal', allowsSuffix:true },
+  { code:'86',  cls:'D', label:'86 — Class D, N60 SS, non-galling, Bi-Lobe HP',   group:'metal', allowsSuffix:true, hp:true },
+  // N60 SS — Class E
+  { code:'82',  cls:'E', label:'82 — Class E, N60 SS, non-galling, Bi-Lobe',      group:'metal', allowsSuffix:true },
+  { code:'92',  cls:'E', label:'92 — Class E, N60 SS, non-galling, Tri-Lobe',     group:'metal', allowsSuffix:true },
+  { code:'87',  cls:'E', label:'87 — Class E, N60 SS, non-galling, Bi-Lobe HP',   group:'metal', allowsSuffix:true, hp:true },
+  // N60 SS — Class F
+  { code:'83',  cls:'F', label:'83 — Class F, N60 SS, non-galling, Bi-Lobe',      group:'metal', allowsSuffix:true },
+  { code:'93',  cls:'F', label:'93 — Class F, N60 SS, non-galling, Tri-Lobe',     group:'metal', allowsSuffix:true },
+  { code:'87F', cls:'F', label:'87F — Class F, N60 SS, non-galling, Bi-Lobe HP',  group:'metal', allowsSuffix:true, hp:true },
+  // N60 SS — Class G
+  { code:'84',  cls:'G', label:'84 — Class G, N60 SS, non-galling, Bi-Lobe',      group:'metal', allowsSuffix:true },
+  // 316L SS — Class C
+  { code:'60',  cls:'C', label:'60 — Class C, 316L SS, Bi-Lobe',                  group:'metal', allowsSuffix:true },
+  { code:'40',  cls:'C', label:'40 — Class C, 316L SS, Tri-Lobe',                 group:'metal', allowsSuffix:true },
+  { code:'65',  cls:'C', label:'65 — Class C, 316L SS, Bi-Lobe HP',               group:'metal', allowsSuffix:true, hp:true },
+  // 316L SS — Class D
+  { code:'61',  cls:'D', label:'61 — Class D, 316L SS, Bi-Lobe',                  group:'metal', allowsSuffix:true },
+  { code:'41',  cls:'D', label:'41 — Class D, 316L SS, Tri-Lobe',                 group:'metal', allowsSuffix:true },
+  { code:'66',  cls:'D', label:'66 — Class D, 316L SS, Bi-Lobe HP',               group:'metal', allowsSuffix:true, hp:true },
+  // 316L SS — Class E
+  { code:'62',  cls:'E', label:'62 — Class E, 316L SS, Bi-Lobe',                  group:'metal', allowsSuffix:true },
+  { code:'42',  cls:'E', label:'42 — Class E, 316L SS, Tri-Lobe',                 group:'metal', allowsSuffix:true },
+  { code:'67',  cls:'E', label:'67 — Class E, 316L SS, Bi-Lobe HP',               group:'metal', allowsSuffix:true, hp:true },
+  // 316L SS — Class F
+  { code:'63',  cls:'F', label:'63 — Class F, 316L SS, Bi-Lobe',                  group:'metal', allowsSuffix:true },
+  { code:'43',  cls:'F', label:'43 — Class F, 316L SS, Tri-Lobe',                 group:'metal', allowsSuffix:true },
+  // 316L SS — Class G
+  { code:'64',  cls:'G', label:'64 — Class G, 316L SS, Bi-Lobe',                  group:'metal', allowsSuffix:true },
+  // Alloy 88 SS
+  { code:'88',  cls:'B', label:'88 — Class B, Alloy 88 SS',                       group:'metal', allowsSuffix:false },
+  { code:'89',  cls:'C', label:'89 — Class C, Alloy 88 SS',                       group:'metal', allowsSuffix:false },
+  // Polymer — Class A
+  { code:'25',  cls:'A', label:'25 — Class A, Hydex, Bi-Lobe',                    group:'polymer', allowsSuffix:false },
+  { code:'27',  cls:'A', label:'27 — Class A, Hydex, Tri-Lobe',                   group:'polymer', allowsSuffix:false },
+  { code:'23',  cls:'A', label:'23 — Class A, Metal Det. Hydex',                  group:'polymer', allowsSuffix:false },
+  { code:'50',  cls:'A', label:'50 — Class A, PEEK',                               group:'polymer', allowsSuffix:false },
+  { code:'70',  cls:'A', label:'70 — Class A, PTFE',                               group:'polymer', allowsSuffix:false },
+  { code:'72',  cls:'A', label:'72 — Class A, PTFE/SS',                            group:'polymer', allowsSuffix:false },
+  { code:'52',  cls:'A', label:'52 — Class A, PolyFlex Acetal MD',                group:'polymer', allowsSuffix:false },
+  // Polymer — Class B
+  { code:'26',  cls:'B', label:'26 — Class B, Hydex, Bi-Lobe',                    group:'polymer', allowsSuffix:false },
+  { code:'28',  cls:'B', label:'28 — Class B, Hydex, Tri-Lobe',                   group:'polymer', allowsSuffix:false },
+  { code:'24',  cls:'B', label:'24 — Class B, Metal Det. Hydex',                  group:'polymer', allowsSuffix:false },
+  { code:'51',  cls:'B', label:'51 — Class B, PEEK',                               group:'polymer', allowsSuffix:false },
+  { code:'71',  cls:'B', label:'71 — Class B, PTFE',                               group:'polymer', allowsSuffix:false },
+  { code:'73',  cls:'B', label:'73 — Class B, PTFE/SS',                            group:'polymer', allowsSuffix:false },
+  // DuraCore (no class restriction)
+  { code:'30',  cls:null, label:'30 — DuraCore (PTFE/SS/PTFE)',                    group:'polymer', allowsSuffix:false },
+  { code:'32',  cls:null, label:'32 — DuraCore MD',                               group:'polymer', allowsSuffix:false },
+  { code:'34',  cls:null, label:'34 — DuraCore HP',                               group:'polymer', allowsSuffix:false, hp:true },
+  { code:'36',  cls:null, label:'36 — DuraCore HP MD',                            group:'polymer', allowsSuffix:false, hp:true },
+  // FoodFirst — N60 SS only, requires FoodFirst cover (16–19)
+  { code:'95',  cls:null, label:'95 — FoodFirst, N60 SS',                         group:'metal', allowsSuffix:false, ff:true },
+  { code:'96',  cls:'E',  label:'96 — FoodFirst HP, Class E, N60 SS',             group:'metal', allowsSuffix:false, ff:true, hp:true },
+  { code:'96F', cls:'F',  label:'96F — FoodFirst HP, Class F, N60 SS',            group:'metal', allowsSuffix:false, ff:true, hp:true },
+  { code:'94',  cls:'F',  label:'94 — FoodFirst HP Tri-Lobe, Class F, N60 SS',   group:'metal', allowsSuffix:false, ff:true, hp:true },
 ];
 
 const SHAFT_OPTS = [
@@ -172,50 +227,18 @@ function defaultShaft(dGroup, isMetal, needsHardened) {
   return isMetal ? (needsHardened ? '12' : '10') : (needsHardened ? '17' : '15');
 }
 
-function resolveFCode(cls, mat, lobeStyle, isHP, isFF, isLF, isHC) {
-  let code;
-  if (mat === '316L') {
-    if (isHP)                  code = ({C:65,D:66,E:67})[cls];
-    else if (lobeStyle==='Tri-Lobe') code = ({C:40,D:41,E:42,F:43})[cls];
-    else                       code = ({C:60,D:61,E:62,F:63,G:64})[cls];
-    if (code != null && isLF) code = `${code}L`;
-    if (code != null && isHC) code = `${code}HC`;
-  } else if (mat === 'N60') {
-    if (isFF) {
-      if (isHP && lobeStyle==='Tri-Lobe' && cls==='F') code = 94;
-      else if (isHP && cls==='E') code = 96;
-      else if (isHP && cls==='F') code = '96F';
-      else code = 95;
-    } else if (isHP)                   code = ({C:85,D:86,E:87,F:'87F'})[cls];
-    else if (lobeStyle==='Tri-Lobe')   code = ({C:90,D:91,E:92,F:93})[cls];
-    else                               code = ({C:80,D:81,E:82,F:83,G:84})[cls];
-    if (code != null && isLF) code = `${code}L`;
-    if (code != null && isHC) code = `${code}HC`;
-  } else if (mat === 'A88') {
-    code = ({B:88,C:89})[cls];
-  } else if (mat === 'Hydex') {
-    code = lobeStyle==='Tri-Lobe' ? ({A:27,B:28})[cls] : ({A:25,B:26})[cls];
-  } else if (mat === 'MDHydex')   { code = ({A:23,B:24})[cls]; }
-  else if (mat === 'PEEK')        { code = ({A:50,B:51})[cls]; }
-  else if (mat === 'PTFE')        { code = ({A:70,B:71})[cls]; }
-  else if (mat === 'PTFE-SS')     { code = ({A:72,B:73})[cls]; }
-  else if (mat === 'PolyFlex')    { code = cls==='A' ? 52 : null; }
-  else if (mat === 'DuraCore')    { code = 30; }
-  else if (mat === 'DuraCoreHD')  { code = 32; }
-  else if (mat === 'DuraCoreHP')  { code = 34; }
-  else if (mat === 'DuraCoreHPMD'){ code = 36; }
-  return code != null ? String(code) : '??';
-}
-
 function buildPN(cfg, pump, cls, isGear) {
   const ser = SERIES.find(s => s.code === cfg.series);
   const modelNum = (pump.name.match(/\d+/) || ['???'])[0];
   const A = ser ? `${ser.pnPrefix}${modelNum}${cfg.flangeMount||''}` : '???';
   const E = `${cfg.connectionType||'??'}${cfg.connectionSize||'??'}${cfg.portOrientation||'H'}`;
-  const isFF = COVER_TYPES.find(c=>c.code===cfg.coverType)?.ff || false;
-  const F = isGear ? '—' : resolveFCode(cls, cfg.rotorMaterial, cfg.lobeStyle, cfg.rotorVariant==='High Pressure', isFF, cfg.materialGrade==='Low Ferrite', cfg.materialGrade==='Hastelloy C');
-  const G = `${cfg.shaft||'??'}${cfg.driveOrientation||'T'}`;
-  return `UNIBLOC-PD ${A}-${cfg.coverType||'??'}-${cfg.rotorHousing||'??'}-${E}-${F}-${G}-${cfg.seal||'??'}-${cfg.elastomer||'??'}`;
+  const matSuffix = cfg.materialGrade === 'Low Ferrite' ? 'L' : cfg.materialGrade === 'Hastelloy C' ? 'HC' : '';
+  const selRotor = ROTOR_CODES.find(r => r.code === cfg.rotorCode);
+  const C = `${cfg.coverType||'??'}${matSuffix}`;
+  const D = `${cfg.rotorHousing||'??'}${matSuffix}`;
+  const F = isGear ? '—' : `${cfg.rotorCode||'??'}${selRotor?.allowsSuffix ? matSuffix : ''}`;
+  const G = `${cfg.shaft||'??'}${matSuffix}${cfg.driveOrientation||'T'}`;
+  return `UNIBLOC-PD ${A}-${C}-${D}-${E}-${F}-${G}-${cfg.seal||'??'}-${cfg.elastomer||'??'}`;
 }
 
 // --- Sub-components ---
@@ -274,20 +297,25 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
   const modelSeries = pumpModelSeries(pump.name);
 
   const set = (k, v) => setConfig(c => ({...c, [k]: v}));
-  const setMulti = obj => setConfig(c => ({...c, ...obj}));
 
-  // Derived booleans from string config values
-  const isHP    = config.rotorVariant === 'High Pressure';
-  const isLF    = config.materialGrade === 'Low Ferrite';
-  const isHC    = config.materialGrade === 'Hastelloy C';
-  const selCover = COVER_TYPES.find(c => c.code === config.coverType) || {};
-  const isFF    = selCover.ff || false;
-  const isHPCover = selCover.hp || false;
-  const selSeal = SEALS.find(s => s.code === config.seal) || {};
+  // Derived values from selected rotor code
+  const selRotor = ROTOR_CODES.find(r => r.code === config.rotorCode);
+  const isMetal  = selRotor ? selRotor.group === 'metal' : true;
+  const isHP     = selRotor?.hp || false;
+
+  // Derived booleans from other config values
+  const isLF       = config.materialGrade === 'Low Ferrite';
+  const isHC       = config.materialGrade === 'Hastelloy C';
+  const matSuffix  = isLF ? 'L' : isHC ? 'HC' : '';
+  const selCover   = COVER_TYPES.find(c => c.code === config.coverType) || {};
+  const isFF       = selCover.ff || false;
+  const isHPCover  = selCover.hp || false;
+  const selSeal    = SEALS.find(s => s.code === config.seal) || {};
   const needsHardened = selSeal.needsHardened || false;
-  const selMat  = ROTOR_MATERIALS.find(m => m.code === config.rotorMaterial) || {};
-  const isMetal = selMat.group === 'metal';
-  const dGroup  = driveGroup(config.drive);
+  const dGroup     = driveGroup(config.drive);
+
+  // fCode shown in Section F header (base code + material suffix if applicable)
+  const fCode = isGear ? '—' : `${config.rotorCode||'??'}${selRotor?.allowsSuffix ? matSuffix : ''}`;
 
   // --- Filtered option lists (silent filtering per Section 3) ---
 
@@ -317,19 +345,11 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
 
   const availFlange = useMemo(() => FLANGE_BY_SERIES[modelSeries] || [], [modelSeries]);
 
-  const availMaterials = useMemo(() => {
-    if (isGear) return ROTOR_MATERIALS.filter(m => m.code === 'N60' || m.code === '316L');
-    if (isFF)   return ROTOR_MATERIALS.filter(m => m.code === 'N60');
-    return ROTOR_MATERIALS;
-  }, [isGear, isFF]);
-
-  const availLobeStyles = useMemo(() => {
-    if (isGear) return [{label:'Gear',code:'Gear'}];
-    const hasTri = ['N60','316L','Hydex'].includes(config.rotorMaterial);
-    return hasTri
-      ? [{label:'Bi-Lobe',code:'Bi-Lobe'},{label:'Tri-Lobe',code:'Tri-Lobe'}]
-      : [{label:'Bi-Lobe',code:'Bi-Lobe'}];
-  }, [isGear, config.rotorMaterial]);
+  // Rotor dropdown: filter by class and FoodFirst cover
+  const availRotors = useMemo(() => {
+    if (isFF) return ROTOR_CODES.filter(r => r.ff && (r.cls === cls || r.cls === null));
+    return ROTOR_CODES.filter(r => !r.ff && (r.cls === cls || r.cls === null));
+  }, [cls, isFF]);
 
   // --- Dependency effects ---
 
@@ -337,11 +357,12 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
   useEffect(() => {
     if (isHP && !isHPCover) set('coverType', '12');
     if (!isHP && isHPCover && !isFF) set('coverType', '10');
-  }, [config.rotorVariant]);
+  }, [config.rotorCode]);
 
-  // 3.7 — FoodFirst cover → force N60 rotor
+  // 3.7 — FoodFirst cover → reset rotor if no longer in available list
   useEffect(() => {
-    if (isFF && config.rotorMaterial !== 'N60') set('rotorMaterial', 'N60');
+    const still = availRotors.find(r => r.code === config.rotorCode);
+    if (!still && availRotors.length > 0) set('rotorCode', availRotors[0].code);
   }, [config.coverType]);
 
   // 3.2b — Seal type → auto-switch shaft to hardened
@@ -352,11 +373,11 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
     }
   }, [config.seal]);
 
-  // 3.2 + 3.2a — Rotor material or drive change → reset shaft if now invalid
+  // 3.2 + 3.2a — Rotor or drive change → reset shaft if now invalid
   useEffect(() => {
     const still = availShafts.find(s => s.code === config.shaft);
     if (!still) set('shaft', defaultShaft(dGroup, isMetal, needsHardened));
-  }, [config.rotorMaterial, config.drive]);
+  }, [config.rotorCode, config.drive]);
 
   // Keep cover valid if model series changes
   useEffect(() => {
@@ -370,8 +391,6 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
     if (!still) set('rotorHousing', '10');
   }, [modelSeries]);
 
-  // --- Derived values ---
-  const fCode = isGear ? '—' : resolveFCode(cls, config.rotorMaterial, config.lobeStyle, isHP, isFF, isLF, isHC);
   const partialPN = buildPN(config, pump, cls, isGear);
   const jacketedMismatch = config.rotorHousing === '15' && config.coverType !== '15';
 
@@ -405,7 +424,7 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
         {/* A — Series */}
         <div style={{marginBottom:14}}>
           <SectionHeader>A — Series</SectionHeader>
-          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10}}>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:8}}>
             <Field label="Gearbox Series">
               <Sel value={config.series} onChange={v => set('series', v)} opts={SERIES}/>
             </Field>
@@ -413,10 +432,24 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
               <Field label="Flange Mount">
                 <Sel value={config.flangeMount||''}
                   onChange={v => set('flangeMount', v)}
-                  opts={[{label:'None',code:''}, ...availFlange.map(f => ({label:f===`F1`?'F1 — Direct Mount':'F2 — Flex Mount', code:f}))]}/>
+                  opts={[{label:'None',code:''}, ...availFlange.map(f => ({label:f==='F1'?'F1 — Direct Mount':'F2 — Flex Mount', code:f}))]}/>
               </Field>
             )}
           </div>
+          <Field label="Material Grade">
+            <Toggle value={config.materialGrade||'Standard'}
+              onChange={v => set('materialGrade', v)}
+              opts={[
+                {label:'Standard',        code:'Standard'},
+                {label:'Low Ferrite (L)', code:'Low Ferrite'},
+                {label:'Hastelloy C (HC)',code:'Hastelloy C'},
+              ]}/>
+          </Field>
+          {(isLF || isHC) && (
+            <div style={{marginTop:6, padding:'7px 10px', background:'#fef3c7', border:'1px solid #f59e0b', borderRadius:4, fontSize:12, color:'#92400e'}}>
+              <span style={{fontWeight:700}}>Custom Material — {isHC ? 'HC' : 'L'} suffix</span> applied to positions C, D, F, G
+            </div>
+          )}
         </div>
 
         <div style={S.divider}/>
@@ -475,33 +508,13 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
               </span>
             )}
           </SectionHeader>
-
-          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:8}}>
-            <Field label="Rotor Material">
-              <Sel value={config.rotorMaterial} onChange={v => set('rotorMaterial', v)} opts={availMaterials}/>
+          {isGear ? (
+            <div style={{fontSize:12, color:'var(--gray)'}}>Gear pump — rotor type fixed.</div>
+          ) : (
+            <Field label="Rotor">
+              <Sel value={config.rotorCode||''} onChange={v => set('rotorCode', v)}
+                opts={availRotors.map(r => ({code:r.code, label:r.label}))}/>
             </Field>
-            <Field label="Lobe Style">
-              <Sel value={config.lobeStyle} onChange={v => set('lobeStyle', v)} opts={availLobeStyles}/>
-            </Field>
-          </div>
-
-          {!isGear && (
-            <div style={{display:'flex', gap:16, flexWrap:'wrap'}}>
-              <Field label="Rotor Variant">
-                <Toggle value={config.rotorVariant||'Standard'}
-                  onChange={v => set('rotorVariant', v)}
-                  opts={[{label:'Standard',code:'Standard'},{label:'High Pressure',code:'High Pressure'}]}/>
-              </Field>
-              <Field label="Material Grade">
-                <Toggle value={config.materialGrade||'Standard'}
-                  onChange={v => set('materialGrade', v)}
-                  opts={[
-                    {label:'Standard',      code:'Standard'},
-                    {label:'Low Ferrite (L)',code:'Low Ferrite'},
-                    {label:'Hastelloy C',   code:'Hastelloy C'},
-                  ]}/>
-              </Field>
-            </div>
           )}
         </div>
 
@@ -510,10 +523,11 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
         {/* G — Shaft & Drive */}
         <div style={{marginBottom:14}}>
           <SectionHeader>G — Shaft &amp; Drive</SectionHeader>
-          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:8}}>
-            <Field label="Drive Type">
-              <Sel value={config.drive} onChange={v => set('drive', v)} opts={DRIVE_TYPES}/>
-            </Field>
+          <div style={{fontSize:12, color:'var(--gray)', marginBottom:8}}>
+            Drive Type: <span style={{fontWeight:600, color:'var(--charcoal)'}}>{config.drive || 'Direct Drive'}</span>
+            <span style={{marginLeft:6, fontSize:11, fontStyle:'italic'}}>(set on Sizing page)</span>
+          </div>
+          <div style={{marginBottom:8}}>
             <Field label="Shaft Type">
               <Sel value={config.shaft} onChange={v => set('shaft', v)} opts={availShafts}/>
             </Field>

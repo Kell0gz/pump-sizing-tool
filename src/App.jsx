@@ -24,14 +24,14 @@ export default function App() {
     pumpTypeFilter: 'All', manualMode: true, manualPump: 'PD450', manualCls: 'D',
     customerName: '', quoteNumber: '', advOpen: false,
     candidates: null, recResult: null, recCls: 'D', recPump: null,
+    driveType: 'Direct Drive',
   });
 
   const [config, setConfig] = useState({
     series: '5000', flangeMount: '',
     coverType: '10', rotorHousing: '10',
     connectionType: 'P', connectionSize: '20', portOrientation: 'H',
-    rotorMaterial: 'N60', lobeStyle: 'Bi-Lobe',
-    rotorVariant: 'Standard', materialGrade: 'Standard',
+    rotorCode: '81', materialGrade: 'Standard',
     drive: 'Direct Drive', shaft: '10', driveOrientation: 'T',
     seal: '11a', elastomer: 'V',
   });
@@ -59,11 +59,16 @@ export default function App() {
     // Smart defaults (Section 5)
     const dutyRPM = result.dutyRPM || 0;
     const seal = dutyRPM > 500 ? '10' : '11a';
+    // Default to N60 SS Bi-Lobe for the sized class
+    const clsToRotor = { A:'25', B:'26', C:'80', D:'81', E:'82', F:'83', G:'84' };
+    const rotorCode = result.isGear ? '' : (clsToRotor[result.cls] || '81');
 
     setConfig(c => ({
       ...c,
       connectionSize: connSize,
       seal,
+      rotorCode,
+      drive: sizingState.driveType,
     }));
     setSaved(false);
     setPage('configure');

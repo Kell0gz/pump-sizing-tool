@@ -8,6 +8,15 @@ import ResultsPanel from './ResultsPanel.jsx';
 const CLASSES = ['A','B','C','D','E','F'];
 const STD_HP = [0.5,1,1.5,2,3,5,7.5,10,15,20,25,30,40,50,60,75,100];
 const MOTOR_TYPES = ['Motor only','Reducer only','Gearmotor'];
+const DRIVE_TYPES = [
+  'Direct Drive',
+  'Compac® FMS',
+  'Gearbox',
+  'VFD Ready',
+  'Air Motor',
+  'Hydraulic Motor — Charlynn',
+  'Hydraulic Motor — Danfoss',
+];
 
 const displayCell = (extra={}) => ({
   padding:'6px 8px', border:'1px solid var(--gray-border)', borderRadius:4,
@@ -19,7 +28,7 @@ export default function SizingPage({ state, setState, onConfigure }) {
   const {
     units, flow, pressure, viscosity, temp, pumpTypeFilter, manualMode,
     manualPump, manualCls, customerName, quoteNumber,
-    recResult, recCls, candidates,
+    recResult, recCls, candidates, driveType,
   } = state;
 
   const set = (k, v) => setState(s => ({...s, [k]:v}));
@@ -319,11 +328,20 @@ export default function SizingPage({ state, setState, onConfigure }) {
       <div style={{...S.card, gridArea:'motor'}}>
         <div style={S.cardHeader}>Motor Selection</div>
 
-        <label style={S.label}>Motor Type</label>
-        <select style={{...S.input, marginBottom:8}} value={motor.type}
-          onChange={e=>setMot('type',e.target.value)}>
-          {MOTOR_TYPES.map(t=><option key={t} value={t}>{t}</option>)}
-        </select>
+        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:8}}>
+          <div>
+            <label style={S.label}>Drive Type</label>
+            <select style={S.input} value={driveType} onChange={e=>set('driveType',e.target.value)}>
+              {DRIVE_TYPES.map(t=><option key={t} value={t}>{t}</option>)}
+            </select>
+          </div>
+          <div>
+            <label style={S.label}>Motor Type</label>
+            <select style={S.input} value={motor.type} onChange={e=>setMot('type',e.target.value)}>
+              {MOTOR_TYPES.map(t=><option key={t} value={t}>{t}</option>)}
+            </select>
+          </div>
+        </div>
 
         <label style={S.label}>Motor / Gearmotor Output RPM</label>
         <input style={{...S.input, marginBottom:10}} type="number" placeholder="e.g. 500"
