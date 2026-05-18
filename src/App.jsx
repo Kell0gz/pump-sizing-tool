@@ -27,9 +27,13 @@ export default function App() {
   });
 
   const [config, setConfig] = useState({
-    rotorStyle: 'Bi-Wing', rotorMaterial: '316SS', connection: '2.0" Tri-Clamp',
-    housing: 'Standard Aluminum', seal: 'Single Mechanical', shaft: 'Standard',
-    drive: 'Direct Drive', reliefValve: false,
+    series: '5000', flangeMount: '',
+    coverType: '10', rotorHousing: '10',
+    connectionType: 'P', connectionSize: '20', portOrientation: 'H',
+    rotorMaterial: 'N60', lobeStyle: 'Bi-Lobe',
+    rotorVariant: 'Standard', materialGrade: 'Standard',
+    drive: 'Direct Drive', shaft: '10', driveOrientation: 'T',
+    seal: '11a', elastomer: 'V',
   });
 
   const [projectName, setProjectName] = useState('');
@@ -38,15 +42,29 @@ export default function App() {
   const [sizingId, setSizingId] = useState('');
 
   const handleConfigure = (result) => {
-    setSizing({
+    const sizing = {
       ...result,
       _flow:     toUS(+sizingState.flow,            'flow',     sizingState.units),
       _pressure: toUS(+sizingState.pressure,         'pressure', sizingState.units),
       _visc:     +sizingState.viscosity,
       _temp:     toUS(+(sizingState.temp || 70),     'temp',     sizingState.units),
-    });
-    const conns = result.pump.port.split('/').map(p => `${p.trim()} Tri-Clamp`);
-    setConfig(c => ({...c, connection: conns[0]}));
+    };
+    setSizing(sizing);
+
+    // Map port size string to connection size code
+    const portStr = result.pump.port.split('/').pop().trim();
+    const portMap = {'0.5"':'05','0.75"':'07','1.0"':'10','1.5"':'15','2.0"':'20','2.5"':'25','3.0"':'30','4.0"':'40','6.0"':'60','8.0"':'80'};
+    const connSize = portMap[portStr] || '20';
+
+    // Smart defaults (Section 5)
+    const dutyRPM = result.dutyRPM || 0;
+    const seal = dutyRPM > 500 ? '10' : '11a';
+
+    setConfig(c => ({
+      ...c,
+      connectionSize: connSize,
+      seal,
+    }));
     setSaved(false);
     setPage('configure');
   };
