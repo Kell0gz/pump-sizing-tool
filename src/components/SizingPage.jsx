@@ -4,19 +4,11 @@ import { LOBE_PUMPS, GEAR_PUMPS, ALL_PUMPS, NO_SLIP_EQ } from '../data/pumps.js'
 import { PRODUCT_DB } from '../data/products.js';
 import { toUS, unitLabel, getRC, calcResult, sizePumps, calcFric } from '../lib/calculations.js';
 import ResultsPanel from './ResultsPanel.jsx';
+import { DRIVE_TYPES } from '../data/configOptions.js';
 
 const CLASSES = ['A','B','C','D','E','F'];
 const STD_HP = [0.5,1,1.5,2,3,5,7.5,10,15,20,25,30,40,50,60,75,100];
 const MOTOR_TYPES = ['Motor only','Reducer only','Gearmotor'];
-const DRIVE_TYPES = [
-  'Direct Drive',
-  'Compac® FMS',
-  'Gearbox',
-  'VFD Ready',
-  'Air Motor',
-  'Hydraulic Motor — Charlynn',
-  'Hydraulic Motor — Danfoss',
-];
 
 const displayCell = (extra={}) => ({
   padding:'6px 8px', border:'1px solid var(--gray-border)', borderRadius:4,
@@ -332,7 +324,7 @@ export default function SizingPage({ state, setState, onConfigure }) {
           <div>
             <label style={S.label}>Drive Type</label>
             <select style={S.input} value={driveType} onChange={e=>set('driveType',e.target.value)}>
-              {DRIVE_TYPES.map(t=><option key={t} value={t}>{t}</option>)}
+              {DRIVE_TYPES.map(t=><option key={t.code} value={t.code}>{t.label}</option>)}
             </select>
           </div>
           <div>
