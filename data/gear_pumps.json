@@ -1,0 +1,113 @@
+[
+  {
+    "name": "GP200/07",
+    "displacement_gal_rev": 0.002,
+    "max_rpm": 1800,
+    "max_flow_gpm": 3.6,
+    "port_size": "0.5\"",
+    "max_psi": 100,
+    "max_temp_f": 212,
+    "slip_equation": null,
+    "auto_sizing_available": false,
+    "notes": "No slip equation — excluded from auto-sizing. Can be selected manually."
+  },
+  {
+    "name": "GP200/10",
+    "displacement_gal_rev": 0.003,
+    "max_rpm": 1800,
+    "max_flow_gpm": 5.4,
+    "port_size": "0.75\"",
+    "max_psi": 100,
+    "max_temp_f": 212,
+    "slip_equation": null,
+    "auto_sizing_available": false,
+    "notes": "No slip equation — excluded from auto-sizing. Can be selected manually."
+  },
+  {
+    "name": "GP175/22",
+    "displacement_gal_rev": 0.0023,
+    "max_rpm": 1800,
+    "max_flow_gpm": 4.14,
+    "port_size": "1.0\"",
+    "max_psi": 100,
+    "max_temp_f": 212,
+    "hp_constant": 16500,
+    "slip_equation": { "a": 0.00002, "b": 0.0284 },
+    "auto_sizing_available": true,
+    "notes": "Shares identical slip coefficients with GP175/38 — intentional, per engineering."
+  },
+  {
+    "name": "GP175/38",
+    "displacement_gal_rev": 0.004,
+    "max_rpm": 1800,
+    "max_flow_gpm": 7.2,
+    "port_size": "1.5\"",
+    "max_psi": 100,
+    "max_temp_f": 212,
+    "hp_constant": 15480,
+    "slip_equation": { "a": 0.00002, "b": 0.0284 },
+    "auto_sizing_available": true,
+    "notes": "Shares identical slip coefficients with GP175/22 — intentional, per engineering."
+  },
+  {
+    "name": "GP275/22",
+    "displacement_gal_rev": 0.007,
+    "max_rpm": 1800,
+    "max_flow_gpm": 12.6,
+    "port_size": "1.0\"",
+    "max_psi": 100,
+    "max_temp_f": 212,
+    "hp_constant": 15480,
+    "slip_equation": { "a": 0.0002, "b": 0.0129 },
+    "auto_sizing_available": true
+  },
+  {
+    "name": "GP275/38",
+    "displacement_gal_rev": 0.010,
+    "max_rpm": 1800,
+    "max_flow_gpm": 18.0,
+    "port_size": "1.5\"",
+    "max_psi": 100,
+    "max_temp_f": 212,
+    "hp_constant": 10320,
+    "slip_equation": { "a": 0.0001, "b": 0.014 },
+    "auto_sizing_available": true,
+    "notes": "Different slip coefficients from GP275/22 despite shared frame designation."
+  },
+  {
+    "name": "GP300/28",
+    "displacement_gal_rev": 0.016,
+    "max_rpm": 1800,
+    "max_flow_gpm": 28.8,
+    "port_size": "1.0\"",
+    "max_psi": 150,
+    "max_temp_f": 212,
+    "hp_constant": 6500,
+    "slip_equation": { "a": 0.0003, "b": 0.012 },
+    "auto_sizing_available": true
+  },
+  {
+    "name": "GP350/40",
+    "displacement_gal_rev": 0.023,
+    "max_rpm": 1800,
+    "max_flow_gpm": 41.4,
+    "port_size": "1.5\"",
+    "max_psi": 125,
+    "max_temp_f": 212,
+    "hp_constant": 4900,
+    "slip_equation": { "a": 0.0002, "b": 0.0151 },
+    "auto_sizing_available": true
+  },
+  {
+    "name": "GP375/52",
+    "displacement_gal_rev": 0.030,
+    "max_rpm": 1800,
+    "max_flow_gpm": 54.0,
+    "port_size": "2.0\"",
+    "max_psi": 125,
+    "max_temp_f": 212,
+    "slip_equation": null,
+    "auto_sizing_available": false,
+    "notes": "No slip equation — excluded from auto-sizing. Can be selected manually."
+  }
+]

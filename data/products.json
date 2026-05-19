@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Water",
+    "viscosity_cps": 1,
+    "shear_pa": 0,
+    "fluid_behavior": "Newtonian"
+  },
+  {
+    "name": "Milk",
+    "viscosity_cps": 2,
+    "shear_pa": 0,
+    "fluid_behavior": "Newtonian"
+  },
+  {
+    "name": "Cream (40%)",
+    "viscosity_cps": 15,
+    "shear_pa": 0,
+    "fluid_behavior": "Newtonian"
+  },
+  {
+    "name": "Vegetable Oil",
+    "viscosity_cps": 65,
+    "shear_pa": 0,
+    "fluid_behavior": "Newtonian"
+  },
+  {
+    "name": "Ice Cream Mix",
+    "viscosity_cps": 300,
+    "shear_pa": 55,
+    "fluid_behavior": "Emulsified dairy"
+  },
+  {
+    "name": "Salsa",
+    "viscosity_cps": 500,
+    "shear_pa": 5,
+    "fluid_behavior": "Contains particles"
+  },
+  {
+    "name": "Chocolate",
+    "viscosity_cps": 800,
+    "shear_pa": 10,
+    "fluid_behavior": "Thixotropic"
+  },
+  {
+    "name": "Ketchup",
+    "viscosity_cps": 1000,
+    "shear_pa": 20,
+    "fluid_behavior": "Shear thinning"
+  },
+  {
+    "name": "Yogurt",
+    "viscosity_cps": 1500,
+    "shear_pa": 8,
+    "fluid_behavior": "Shear thinning"
+  },
+  {
+    "name": "Glycerin",
+    "viscosity_cps": 1500,
+    "shear_pa": 0,
+    "fluid_behavior": "Newtonian"
+  },
+  {
+    "name": "Corn Syrup",
+    "viscosity_cps": 2500,
+    "shear_pa": 0,
+    "fluid_behavior": "Newtonian"
+  },
+  {
+    "name": "Tomato Paste",
+    "viscosity_cps": 5000,
+    "shear_pa": 25,
+    "fluid_behavior": "Shear thinning"
+  },
+  {
+    "name": "Mayonnaise",
+    "viscosity_cps": 6000,
+    "shear_pa": 30,
+    "fluid_behavior": "Shear thinning"
+  },
+  {
+    "name": "Honey",
+    "viscosity_cps": 10000,
+    "shear_pa": 0,
+    "fluid_behavior": "Newtonian"
+  },
+  {
+    "name": "Peanut Butter",
+    "viscosity_cps": 25000,
+    "shear_pa": 40,
+    "fluid_behavior": "Viscoplastic"
+  }
+]

@@ -136,12 +136,12 @@ export const ROTOR_CODES = [
 export const SHAFT_OPTS = [
   { label: 'Metal — Standard',              code: '10', drive: 'std',       metal: true  },
   { label: 'Metal — Hardened Seal Area',    code: '11', drive: 'std',       metal: true,  series200300: true },
-  { label: 'Metal — Hardened Wear Sleeve',  code: '12', drive: 'std',       metal: true,  hardened: true },
-  { label: 'Metal — Standard Wear Sleeve',  code: '13', drive: 'std',       metal: true  },
+  { label: 'Metal — Hardened Wear Sleeve',  code: '12', drive: 'std',       metal: true,  hardened: true, wearSleeve: true },
+  { label: 'Metal — Standard Wear Sleeve',  code: '13', drive: 'std',       metal: true,  wearSleeve: true },
   { label: 'Non-Metal — Standard',          code: '15', drive: 'std',       metal: false },
   { label: 'Non-Metal — Hardened Seal Area',code: '16', drive: 'std',       metal: false, hardened: true },
-  { label: 'Non-Metal — Hardened Sleeve',   code: '17', drive: 'std',       metal: false, hardened: true },
-  { label: 'Non-Metal — Standard Sleeve',   code: '18', drive: 'std',       metal: false },
+  { label: 'Non-Metal — Hardened Sleeve',   code: '17', drive: 'std',       metal: false, hardened: true, wearSleeve: true },
+  { label: 'Non-Metal — Standard Sleeve',   code: '18', drive: 'std',       metal: false, wearSleeve: true },
   { label: 'Charlynn + Metal — Standard',           code: '20', drive: 'charlynn', metal: true  },
   { label: 'Charlynn + Metal — Hardened Seal Area', code: '21', drive: 'charlynn', metal: true,  hardened: true },
   { label: 'Charlynn + Metal — Hardened Sleeve',    code: '22', drive: 'charlynn', metal: true,  hardened: true },
@@ -210,6 +210,21 @@ export const DRIVE_TYPES = [
   { label: 'Hydraulic Motor — Danfoss', code: 'Hydraulic Motor — Danfoss', driveGroup: 'danfoss' },
 ];
 
+// Per-model seal allowlist: seals excluded at the series level but permitted on specific models.
+// Key = seal code, value = array of model numbers (numeric) that override the series exclusion.
+export const MODEL_SEAL_ALLOWLIST = {
+  '60': [501, 551, 576],  // Single O-Ring — PD500 exceptions alongside PD200 series
+};
+
+// Per-model seal excludelist: seals allowed at the series level but blocked on specific models.
+// Key = seal code, value = array of model numbers (numeric) that are excluded despite series availability.
+export const MODEL_SEAL_EXCLUDELIST = {
+  '30': [501, 551, 576],  // Double Mechanical — not available on these PD500 models
+  '31': [501, 551, 576],
+  '32': [501, 551, 576],
+  '33': [501, 551, 576],
+};
+
 // Per-series configuration restrictions. All pumps within a series share the same
 // constraints — there are no per-model variations within a series.
 // excludedCovers/Housings/Seals: option codes that are NOT available for this series.
@@ -217,38 +232,53 @@ export const DRIVE_TYPES = [
 // flangeMounts: which flange mount options are available (replaces FLANGE_BY_SERIES).
 export const SERIES_RESTRICTIONS = {
   200: {
-    excludedCovers:   ['12','14','16','17','18','19'],
-    excludedHousings: ['15'],
-    excludedSeals:    ['10','12a','12b','13'],
-    shaftCode11:      true,
-    flangeMounts:     ['F1','F2'],
+    excludedSeries:    ['4000A','4000B','3000'],
+    excludedCovers:    ['12','14','16','17','18','19','20','21'],
+    excludedHousings:  ['15'],
+    excludedSeals:     ['10','12a','12b','13','30','31','32','33','40','41a','41b','42a','42b','61','61FL','70FL','71','72'],
+    shaftCode11:       true,
+    wearSleeveShafts:  false,
+    hydraulicShafts:   false,
+    flangeMounts:      ['F1','F2'],
   },
   300: {
-    excludedCovers:   ['12','14'],
-    excludedHousings: [],
-    excludedSeals:    [],
-    shaftCode11:      true,
-    flangeMounts:     ['F1','F2'],
+    excludedSeries:    ['3000'],
+    excludedCovers:    ['12','14','20'],
+    excludedHousings:  [],
+    excludedSeals:     ['60'],
+    shaftCode11:       true,
+    wearSleeveShafts:  false,
+    hydraulicShafts:   false,
+    flangeMounts:      ['F1','F2'],
   },
   400: {
-    excludedCovers:   [],
-    excludedHousings: [],
-    excludedSeals:    [],
-    shaftCode11:      false,
-    flangeMounts:     ['F2'],
+    excludedSeries:    ['3000'],
+    excludedCovers:    ['20'],
+    excludedHousings:  [],
+    excludedSeals:     ['60'],
+    shaftCode11:       false,
+    wearSleeveShafts:  true,
+    hydraulicShafts:   false,
+    flangeMounts:      ['F2'],
   },
   500: {
-    excludedCovers:   [],
-    excludedHousings: [],
-    excludedSeals:    [],
-    shaftCode11:      false,
-    flangeMounts:     ['F1'],
+    excludedSeries:    ['3000'],
+    excludedCovers:    [],
+    excludedHousings:  [],
+    excludedSeals:     ['60'],
+    shaftCode11:       false,
+    wearSleeveShafts:  true,
+    hydraulicShafts:   true,
+    flangeMounts:      ['F1'],
   },
   600: {
-    excludedCovers:   [],
-    excludedHousings: [],
-    excludedSeals:    [],
-    shaftCode11:      false,
-    flangeMounts:     [],
+    excludedSeries:    ['4000A','4000B'],
+    excludedCovers:    ['20'],
+    excludedHousings:  [],
+    excludedSeals:     ['60','30','31','32','33'],
+    shaftCode11:       false,
+    wearSleeveShafts:  true,
+    hydraulicShafts:   false,
+    flangeMounts:      [],
   },
 };

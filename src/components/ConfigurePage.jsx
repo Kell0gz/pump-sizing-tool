@@ -2,7 +2,8 @@ import { useEffect, useMemo } from 'react';
 import { S } from '../styles.js';
 import {
   SERIES, COVER_TYPES, ROTOR_HOUSINGS, CONNECTION_TYPES, CONNECTION_SIZES,
-  ROTOR_CODES, SHAFT_OPTS, SEALS, ELASTOMERS, DRIVE_TYPES, SERIES_RESTRICTIONS,
+  ROTOR_CODES, SHAFT_OPTS, SEALS, ELASTOMERS, DRIVE_TYPES,
+  SERIES_RESTRICTIONS, MODEL_SEAL_ALLOWLIST, MODEL_SEAL_EXCLUDELIST,
 } from '../data/configOptions.js';
 
 // --- Helpers ---
@@ -93,6 +94,7 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
   const pump   = sizing.pump;
   const cls    = sizing.cls;
   const isGear = sizing.isGear;
+  const modelNum    = parseInt((pump.name.match(/\d+/) || ['0'])[0]);
   const modelSeries = pumpModelSeries(pump.name);
   const sr = SERIES_RESTRICTIONS[modelSeries] || SERIES_RESTRICTIONS[600];
 
@@ -125,19 +127,33 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
     return true;
   }), [sr, isHP]);
 
+  const availSeriesOpts = useMemo(() =>
+    SERIES.filter(s => !sr.excludedSeries.includes(s.code))
+  , [sr]);
+
   const availHousings = useMemo(() =>
     ROTOR_HOUSINGS.filter(h => !sr.excludedHousings.includes(h.code))
   , [sr]);
 
   const availSeals = useMemo(() =>
-    SEALS.filter(s => !sr.excludedSeals.includes(s.code))
-  , [sr]);
+    SEALS.filter(s => {
+      if (sr.excludedSeals.includes(s.code)) {
+        const allowlist = MODEL_SEAL_ALLOWLIST[s.code];
+        return allowlist ? allowlist.includes(modelNum) : false;
+      }
+      const excludelist = MODEL_SEAL_EXCLUDELIST[s.code];
+      if (excludelist && excludelist.includes(modelNum)) return false;
+      return true;
+    })
+  , [sr, modelNum]);
 
   const availShafts = useMemo(() => SHAFT_OPTS.filter(s => {
+    if (s.drive !== 'std' && !sr.hydraulicShafts) return false;
     if (s.drive !== dGroup) return false;
     if (isMetal && !s.metal) return false;
     if (!isMetal && s.metal) return false;
     if (s.series200300 && !sr.shaftCode11) return false;
+    if (s.wearSleeve && !sr.wearSleeveShafts) return false;
     return true;
   }), [dGroup, isMetal, sr]);
 
@@ -176,10 +192,22 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
     if (!still) set('shaft', defaultShaft(dGroup, isMetal, needsHardened));
   }, [config.rotorCode, config.drive]);
 
+  // Reset gearbox series if no longer valid for this pump model series
+  useEffect(() => {
+    const still = availSeriesOpts.find(s => s.code === config.series);
+    if (!still) set('series', '5000');
+  }, [modelSeries]);
+
   // Keep cover valid when model series changes
   useEffect(() => {
     const still = availCovers.find(c => c.code === config.coverType);
     if (!still) set('coverType', '10');
+  }, [modelSeries]);
+
+  // Keep shaft valid when model series changes
+  useEffect(() => {
+    const still = availShafts.find(s => s.code === config.shaft);
+    if (!still) set('shaft', defaultShaft(sr.hydraulicShafts ? dGroup : 'std', isMetal, needsHardened));
   }, [modelSeries]);
 
   // Keep housing valid when model series changes
@@ -223,7 +251,7 @@ export default function ConfigurePage({ sizing, config, setConfig, projectName, 
           <SectionHeader>A — Series</SectionHeader>
           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:8}}>
             <Field label="Gearbox Series">
-              <Sel value={config.series} onChange={v => set('series', v)} opts={SERIES}/>
+              <Sel value={config.series} onChange={v => set('series', v)} opts={availSeriesOpts}/>
             </Field>
             {availFlange.length > 0 && (
               <Field label="Flange Mount">

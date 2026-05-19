@@ -1,0 +1,365 @@
+[
+  {
+    "name": "PD200-0",
+    "displacement_gal_rev": 0.003,
+    "max_rpm": 1400,
+    "max_flow_gpm": 3.0,
+    "port_size": "0.5\"",
+    "hp_constant": 16500,
+    "rotor_class_limits": {
+      "A": { "max_psi": 90,  "max_temp_f": 257 },
+      "B": { "max_psi": 90,  "max_temp_f": 257 },
+      "C": { "max_psi": 90,  "max_temp_f": 257 },
+      "D": { "max_psi": 150, "max_temp_f": 329 },
+      "E": { "max_psi": 165, "max_temp_f": 401 },
+      "F": { "max_psi": 200, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.31, "F": 1.70 },
+    "slip_equation": { "a": 0.00003, "b": 0.0076 },
+    "rotor_dimensions": { "inner_diameter_mm": 29.87, "outer_diameter_mm": 52.01, "depth_mm": 11.91 },
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD200",
+    "displacement_gal_rev": 0.008,
+    "max_rpm": 1400,
+    "max_flow_gpm": 8.0,
+    "port_size": "0.5\" / 0.75\"",
+    "hp_constant": 15480,
+    "rotor_class_limits": {
+      "A": { "max_psi": 90,  "max_temp_f": 257 },
+      "B": { "max_psi": 90,  "max_temp_f": 257 },
+      "C": { "max_psi": 90,  "max_temp_f": 257 },
+      "D": { "max_psi": 150, "max_temp_f": 329 },
+      "E": { "max_psi": 165, "max_temp_f": 401 },
+      "F": { "max_psi": 200, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.31, "F": 1.70 },
+    "slip_equation": { "a": 0.00008, "b": 0.0097 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD250",
+    "displacement_gal_rev": 0.011,
+    "max_rpm": 1200,
+    "max_flow_gpm": 11.0,
+    "port_size": "0.75\"",
+    "hp_constant": 10320,
+    "rotor_class_limits": {
+      "A": { "max_psi": 90,  "max_temp_f": 257 },
+      "B": { "max_psi": 90,  "max_temp_f": 257 },
+      "C": { "max_psi": 90,  "max_temp_f": 257 },
+      "D": { "max_psi": 120, "max_temp_f": 329 },
+      "E": { "max_psi": 150, "max_temp_f": 401 },
+      "F": { "max_psi": 185, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.31, "F": 1.70 },
+    "slip_equation": { "a": 0.0001, "b": 0.0277 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD275",
+    "displacement_gal_rev": 0.014,
+    "max_rpm": 1200,
+    "max_flow_gpm": 14.0,
+    "port_size": "0.75\" / 1.0\"",
+    "hp_constant": 9650,
+    "rotor_class_limits": {
+      "A": { "max_psi": 80,  "max_temp_f": 257 },
+      "B": { "max_psi": 80,  "max_temp_f": 257 },
+      "C": { "max_psi": 80,  "max_temp_f": 257 },
+      "D": { "max_psi": 90,  "max_temp_f": 329 },
+      "E": { "max_psi": 135, "max_temp_f": 401 },
+      "F": { "max_psi": 165, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.31, "F": 1.70 },
+    "slip_equation": { "a": 0.0001, "b": 0.0221 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD300",
+    "displacement_gal_rev": 0.028,
+    "max_rpm": 1000,
+    "max_flow_gpm": 28.0,
+    "port_size": "1.0\" / 1.5\"",
+    "hp_constant": 4900,
+    "rotor_class_limits": {
+      "A": { "max_psi": 90,  "max_temp_f": 257 },
+      "B": { "max_psi": 90,  "max_temp_f": 257 },
+      "C": { "max_psi": 90,  "max_temp_f": 257 },
+      "D": { "max_psi": 165, "max_temp_f": 329 },
+      "E": { "max_psi": 200, "max_temp_f": 401 },
+      "F": { "max_psi": 250, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.22, "F": 1.53 },
+    "slip_equation": { "a": 0.00008, "b": 0.122 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD350",
+    "displacement_gal_rev": 0.040,
+    "max_rpm": 1000,
+    "max_flow_gpm": 40.0,
+    "port_size": "1.5\" / 2.0\"",
+    "hp_constant": 3500,
+    "rotor_class_limits": {
+      "A": { "max_psi": 90,  "max_temp_f": 257 },
+      "B": { "max_psi": 90,  "max_temp_f": 257 },
+      "C": { "max_psi": 90,  "max_temp_f": 257 },
+      "D": { "max_psi": 135, "max_temp_f": 329 },
+      "E": { "max_psi": 175, "max_temp_f": 401 },
+      "F": { "max_psi": 220, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.22, "F": 1.53 },
+    "slip_equation": { "a": 0.0001, "b": 0.1305 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD400",
+    "displacement_gal_rev": 0.081,
+    "max_rpm": 900,
+    "max_flow_gpm": 72.9,
+    "port_size": "1.5\"",
+    "hp_constant": 1325,
+    "rotor_class_limits": {
+      "A": { "max_psi": 150, "max_temp_f": 257 },
+      "B": { "max_psi": 150, "max_temp_f": 257 },
+      "C": { "max_psi": 150, "max_temp_f": 257 },
+      "D": { "max_psi": 200, "max_temp_f": 329 },
+      "E": { "max_psi": 220, "max_temp_f": 401 },
+      "F": { "max_psi": 275, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.17, "F": 1.38 },
+    "slip_equation": { "a": 0.0016, "b": -0.0428 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD450",
+    "displacement_gal_rev": 0.109,
+    "max_rpm": 900,
+    "max_flow_gpm": 98.1,
+    "port_size": "2.0\"",
+    "hp_constant": 1080,
+    "rotor_class_limits": {
+      "A": { "max_psi": 110, "max_temp_f": 257 },
+      "B": { "max_psi": 110, "max_temp_f": 257 },
+      "C": { "max_psi": 110, "max_temp_f": 257 },
+      "D": { "max_psi": 135, "max_temp_f": 329 },
+      "E": { "max_psi": 175, "max_temp_f": 401 },
+      "F": { "max_psi": 220, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.17, "F": 1.38 },
+    "slip_equation": { "a": 0.0011, "b": 0.1458 },
+    "rotor_dimensions": { "inner_diameter_mm": 46.73, "outer_diameter_mm": 108.47, "depth_mm": 53.53 },
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD500",
+    "displacement_gal_rev": 0.221,
+    "max_rpm": 800,
+    "max_flow_gpm": 176.8,
+    "port_size": "2.5\"",
+    "hp_constant": 850,
+    "rotor_class_limits": {
+      "A": { "max_psi": 150, "max_temp_f": 257 },
+      "B": { "max_psi": 150, "max_temp_f": 257 },
+      "C": { "max_psi": 150, "max_temp_f": 257 },
+      "D": { "max_psi": 250, "max_temp_f": 329 },
+      "E": { "max_psi": 300, "max_temp_f": 401 },
+      "F": { "max_psi": 375, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.0041, "b": -0.008 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true,
+    "notes": "Shares displacement and slip coefficients with PD501 — mechanical distinction unconfirmed."
+  },
+  {
+    "name": "PD501",
+    "displacement_gal_rev": 0.221,
+    "max_rpm": 800,
+    "max_flow_gpm": 176.8,
+    "port_size": "2.5\"",
+    "hp_constant": 850,
+    "rotor_class_limits": {
+      "A": { "max_psi": 150, "max_temp_f": 257 },
+      "B": { "max_psi": 150, "max_temp_f": 257 },
+      "C": { "max_psi": 150, "max_temp_f": 257 },
+      "D": { "max_psi": 250, "max_temp_f": 329 },
+      "E": { "max_psi": 300, "max_temp_f": 401 },
+      "F": { "max_psi": 375, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.0041, "b": -0.008 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true,
+    "notes": "Shares displacement and slip coefficients with PD500 — mechanical distinction unconfirmed."
+  },
+  {
+    "name": "PD550",
+    "displacement_gal_rev": 0.285,
+    "max_rpm": 800,
+    "max_flow_gpm": 228.0,
+    "port_size": "3.0\"",
+    "hp_constant": 725,
+    "rotor_class_limits": {
+      "A": { "max_psi": 150, "max_temp_f": 257 },
+      "B": { "max_psi": 150, "max_temp_f": 257 },
+      "C": { "max_psi": 150, "max_temp_f": 257 },
+      "D": { "max_psi": 200, "max_temp_f": 329 },
+      "E": { "max_psi": 225, "max_temp_f": 401 },
+      "F": { "max_psi": 280, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.0039, "b": 0.0679 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true,
+    "notes": "Shares displacement and slip coefficients with PD551 — mechanical distinction unconfirmed."
+  },
+  {
+    "name": "PD551",
+    "displacement_gal_rev": 0.285,
+    "max_rpm": 800,
+    "max_flow_gpm": 228.0,
+    "port_size": "3.0\"",
+    "hp_constant": 725,
+    "rotor_class_limits": {
+      "A": { "max_psi": 150, "max_temp_f": 257 },
+      "B": { "max_psi": 150, "max_temp_f": 257 },
+      "C": { "max_psi": 150, "max_temp_f": 257 },
+      "D": { "max_psi": 200, "max_temp_f": 329 },
+      "E": { "max_psi": 225, "max_temp_f": 401 },
+      "F": { "max_psi": 280, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.0039, "b": 0.0679 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true,
+    "notes": "Shares displacement and slip coefficients with PD550 — mechanical distinction unconfirmed."
+  },
+  {
+    "name": "PD575",
+    "displacement_gal_rev": 0.361,
+    "max_rpm": 700,
+    "max_flow_gpm": 252.7,
+    "port_size": "3.0\" / 4.0\"",
+    "hp_constant": 420,
+    "rotor_class_limits": {
+      "A": { "max_psi": 120, "max_temp_f": 257 },
+      "B": { "max_psi": 120, "max_temp_f": 257 },
+      "C": { "max_psi": 120, "max_temp_f": 257 },
+      "D": { "max_psi": 150, "max_temp_f": 329 },
+      "E": { "max_psi": 150, "max_temp_f": 401 },
+      "F": { "max_psi": 185, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.0037, "b": 0.036 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD576",
+    "displacement_gal_rev": 0.361,
+    "max_rpm": 700,
+    "max_flow_gpm": 252.7,
+    "port_size": "3.0\" / 4.0\"",
+    "hp_constant": 420,
+    "rotor_class_limits": {
+      "A": { "max_psi": 120, "max_temp_f": 257 },
+      "B": { "max_psi": 120, "max_temp_f": 257 },
+      "C": { "max_psi": 120, "max_temp_f": 257 },
+      "D": { "max_psi": 150, "max_temp_f": 329 },
+      "E": { "max_psi": 150, "max_temp_f": 401 },
+      "F": { "max_psi": 185, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.0037, "b": 0.0354 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD600",
+    "displacement_gal_rev": 0.460,
+    "max_rpm": 600,
+    "max_flow_gpm": 276.0,
+    "port_size": "4.0\"",
+    "rotor_class_limits": null,
+    "slip_factors": null,
+    "slip_equation": null,
+    "rotor_dimensions": null,
+    "auto_sizing_available": false,
+    "notes": "Missing rotor class limits, slip factors, and slip equation. Engineering data needed from Unibloc."
+  },
+  {
+    "name": "PD602",
+    "displacement_gal_rev": 0.530,
+    "max_rpm": 600,
+    "max_flow_gpm": 318.0,
+    "port_size": "4.0\"",
+    "hp_constant": 390,
+    "rotor_class_limits": {
+      "A": { "max_psi": 200, "max_temp_f": 257 },
+      "B": { "max_psi": 200, "max_temp_f": 257 },
+      "C": { "max_psi": 200, "max_temp_f": 257 },
+      "D": { "max_psi": 350, "max_temp_f": 329 },
+      "E": { "max_psi": 500, "max_temp_f": 401 },
+      "F": { "max_psi": 500, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.0016, "b": -0.0319 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD650",
+    "displacement_gal_rev": 0.700,
+    "max_rpm": 500,
+    "max_flow_gpm": 350.0,
+    "port_size": "4.0\" / 6.0\"",
+    "rotor_class_limits": null,
+    "slip_factors": null,
+    "slip_equation": null,
+    "rotor_dimensions": null,
+    "auto_sizing_available": false,
+    "notes": "Missing rotor class limits, slip factors, and slip equation. Engineering data needed from Unibloc."
+  },
+  {
+    "name": "PD652",
+    "displacement_gal_rev": 0.800,
+    "max_rpm": 500,
+    "max_flow_gpm": 400.0,
+    "port_size": "4.0\" / 6.0\"",
+    "hp_constant": 256,
+    "rotor_class_limits": {
+      "A": { "max_psi": 270, "max_temp_f": 257 },
+      "B": { "max_psi": 270, "max_temp_f": 257 },
+      "C": { "max_psi": 270, "max_temp_f": 257 },
+      "D": { "max_psi": 350, "max_temp_f": 329 },
+      "E": { "max_psi": 500, "max_temp_f": 401 },
+      "F": { "max_psi": 500, "max_temp_f": 401 }
+    },
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": { "a": 0.004, "b": -0.2484 },
+    "rotor_dimensions": null,
+    "auto_sizing_available": true
+  },
+  {
+    "name": "PD677",
+    "displacement_gal_rev": 1.000,
+    "max_rpm": 500,
+    "max_flow_gpm": 500.0,
+    "port_size": "6.0\" / 8.0\"",
+    "rotor_class_limits": null,
+    "slip_factors": { "A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0, "E": 1.11, "F": 1.23 },
+    "slip_equation": null,
+    "rotor_dimensions": null,
+    "auto_sizing_available": false,
+    "notes": "Missing rotor class pressure/temperature limits and slip equation coefficients. Slip factors available but cannot auto-size without class limits and slip equation. Engineering data needed from Unibloc."
+  }
+]
