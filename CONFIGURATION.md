@@ -492,6 +492,36 @@ The implementation source is `src/data/configOptions.js` → `SERIES_RESTRICTION
 | F1 | Direct Mount Flange | ✓ | ✓ | — | ✓ | — |
 | F2 | Flex Mount Flange | ✓ | ✓ | ✓ | — | — |
 
+### E — Connection Size by pump model
+
+The connection size dropdown allows any size, but each pump model has a native port size that should normally be matched. The Configure page auto-sets the connection size to the pump's largest listed port when the user arrives from Sizing. Selecting a smaller or larger size than listed here is not blocked but would typically indicate a reducer fitting is being used.
+
+| Pump Model | Native Port Size(s) | Auto-set code |
+|---|---|---|
+| PD200-0 | 1/2" | `05` |
+| PD200 | 1/2" / 3/4" | `07` |
+| PD250 | 3/4" | `07` |
+| PD275 | 3/4" / 1.0" | `10` |
+| PD300 | 1.0" / 1.5" | `15` |
+| PD350 | 1.5" / 2.0" | `20` |
+| PD400 | 1.5" | `15` |
+| PD450 | 2.0" | `20` |
+| PD500 | 2.5" | `25` |
+| PD501 | 2.5" | `25` |
+| PD550 | 3.0" | `30` |
+| PD551 | 3.0" | `30` |
+| PD575 | 3.0" / 4.0" | `40` |
+| PD576 | 3.0" / 4.0" | `40` |
+| PD600 | 4.0" | `40` |
+| PD602 | 4.0" | `40` |
+| PD650 | 4.0" / 6.0" | `60` |
+| PD652 | 4.0" / 6.0" | `60` |
+| PD677 | 6.0" / 8.0" | `80` |
+
+> Auto-set logic in `handleConfigure` (App.jsx): takes the last port size listed in `pump.port_size` and maps it to the connection size code. Port sizes sourced from `data/lobe_pumps.json`.
+
+> **Future enforcement:** The connection size dropdown is not currently filtered by pump model. A future enhancement could restrict available sizes to the pump's native port(s) and the next size up/down to allow for reducers.
+
 ### Summary table
 
 | Restriction | PD200 | PD300 | PD400 | PD500 | PD600 |
