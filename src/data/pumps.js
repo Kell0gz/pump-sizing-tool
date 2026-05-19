@@ -1,8 +1,8 @@
 export const LOBE_PUMPS = [
   { name:'PD200-0', disp:0.003, maxRPM:1400, maxFlow:3.0,  port:'0.5"' },
   { name:'PD200',   disp:0.008, maxRPM:1400, maxFlow:8.0,  port:'0.5" / 0.75"' },
-  { name:'PD250',   disp:0.011, maxRPM:1200, maxFlow:11.0, port:'0.75"' },
-  { name:'PD275',   disp:0.014, maxRPM:1200, maxFlow:14.0, port:'0.75" / 1.0"' },
+  { name:'PD250',   disp:0.011, maxRPM:1400, maxFlow:11.0, port:'0.75"' },
+  { name:'PD275',   disp:0.014, maxRPM:1400, maxFlow:14.0, port:'0.75" / 1.0"' },
   { name:'PD300',   disp:0.028, maxRPM:1000, maxFlow:28.0, port:'1.0" / 1.5"' },
   { name:'PD350',   disp:0.040, maxRPM:1000, maxFlow:40.0, port:'1.5" / 2.0"' },
   { name:'PD400',   disp:0.081, maxRPM:900,  maxFlow:72.9, port:'1.5"' },

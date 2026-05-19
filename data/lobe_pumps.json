@@ -42,7 +42,7 @@
   {
     "name": "PD250",
     "displacement_gal_rev": 0.011,
-    "max_rpm": 1200,
+    "max_rpm": 1400,
     "max_flow_gpm": 11.0,
     "port_size": "0.75\"",
     "hp_constant": 10320,
@@ -62,7 +62,7 @@
   {
     "name": "PD275",
     "displacement_gal_rev": 0.014,
-    "max_rpm": 1200,
+    "max_rpm": 1400,
     "max_flow_gpm": 14.0,
     "port_size": "0.75\" / 1.0\"",
     "hp_constant": 9650,
